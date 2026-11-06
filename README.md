@@ -11,7 +11,7 @@
     *   Root-Tip Mask
 *   **Resolusi Fleksibel:** Atur dimensi kanvas (lebar x tinggi) sesuai kebutuhan proyek Anda (hingga 4096px).
 
-## 📂 Struktur Folder (Clean Code)
+## 📂 Struktur Folder
 
 Proyek ini dipisahkan menjadi beberapa modul untuk memudahkan pengembangan dan pemeliharaan:
 
