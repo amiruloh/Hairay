@@ -1,5 +1,6 @@
 export function showToast(msg, duration = 2000) {
     const el = document.getElementById('toast');
+    if (!el) return;
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(el._t);
@@ -9,6 +10,7 @@ export function showToast(msg, duration = 2000) {
 export function setLoading(show, text = 'Generating...') {
     const el = document.getElementById('loader');
     const p = document.getElementById('loaderText');
+    if (!el) return;
     if (p) p.textContent = text;
     el.classList.toggle('hidden', !show);
 }

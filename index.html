@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ Hairay - Free HairCard Genertor</title>
+    <title>✨ Hairay - Free HairCard Generator</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,153 +22,164 @@
 <!-- ============ LAYOUT ============ -->
 <div id="app">
 
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-        <div class="logo">
-            <span class="logo-icon">💇</span>
-            <div>
-                <h1>Hairay</h1>
-                <small>Hair Card Genertor for 3D Artist</small>
-            </div>
+    <!-- TOOLBAR FULL WIDTH (Paling Atas) -->
+    <div class="toolbar" id="topToolbar">
+        <div class="toolbar-left">
+            <span class="badge" id="statusText">Alpha</span>
+            <span class="info" id="statusInfo">512 × 1024 · 200 strands</span>
         </div>
-
-        <!-- Accordion: Hair Parameters -->
-        <details class="acc" open>
-            <summary>💇 Hair Parameters</summary>
-            <div class="acc-body">
-                <div class="control-group">
-                    <label>Strand Count <span id="val-count" class="value-display">200</span></label>
-                    <input type="range" id="count" min="10" max="2000" value="200">
-                </div>
-                <div class="control-group">
-                    <label>Base Thickness <span id="val-thickness" class="value-display">4</span></label>
-                    <input type="range" id="thickness" min="1" max="20" value="4">
-                </div>
-                <div class="control-group">
-                    <label>Length Variation <span id="val-length" class="value-display">80%</span></label>
-                    <input type="range" id="length" min="30" max="100" value="80">
-                </div>
-                <div class="control-group">
-                    <label>Direction (Bend) <span id="val-bend" class="value-display">0</span></label>
-                    <input type="range" id="bend" min="-150" max="150" value="0">
-                </div>
-                <div class="control-group">
-                    <label>Waviness <span id="val-wave" class="value-display">20</span></label>
-                    <input type="range" id="wave" min="0" max="100" value="20">
-                </div>
-                <div class="control-group">
-                    <label>Wave Frequency <span id="val-freq" class="value-display">3</span></label>
-                    <input type="range" id="freq" min="1" max="10" value="3">
-                </div>
-                <div class="control-group">
-                    <label>Spread Width <span id="val-spread" class="value-display">60</span></label>
-                    <input type="range" id="spread" min="10" max="500" value="60">
-                </div>
-                <div class="control-group">
-                    <label>Clumping <span id="val-clump" class="value-display">0</span></label>
-                    <input type="range" id="clump" min="0" max="100" value="0">
-                </div>
-                <div class="control-group">
-                    <label>Random Seed <span id="val-seed" class="value-display">1</span></label>
-                    <input type="range" id="seed" min="1" max="999" value="1">
+        
+        <div class="toolbar-right">
+            <!-- Preset Dropdown -->
+            <div class="dropdown" id="presetDropdown">
+                <button class="toolbar-dropdown-btn" id="presetToggle">
+                    🎨 Preset <span class="caret">▾</span>
+                </button>
+                <div class="dropdown-menu" id="presetMenu">
+                    <button class="dropdown-item" data-preset="straight">💇 Straight</button>
+                    <button class="dropdown-item" data-preset="wavy">🌊 Wavy</button>
+                    <button class="dropdown-item" data-preset="curly">🌀 Curly</button>
+                    <button class="dropdown-item" data-preset="messy">💥 Messy</button>
                 </div>
             </div>
-        </details>
 
-        <!-- Accordion: Appearance -->
-        <details class="acc" open>
-            <summary>🌈 Appearance</summary>
-            <div class="acc-body">
-                <div class="control-group">
-                    <label>Root Color</label>
-                    <input type="color" id="rootColor" value="#2a1508">
-                </div>
-                <div class="control-group">
-                    <label>Tip Color</label>
-                    <input type="color" id="tipColor" value="#a56b46">
-                </div>
-                <div class="control-group">
-                    <label>Color Variance <span id="val-variance" class="value-display">25</span></label>
-                    <input type="range" id="variance" min="0" max="100" value="25">
-                </div>
-                <div class="control-group">
-                    <label>Normal Strength <span id="val-normalStrength" class="value-display">1.5</span></label>
-                    <input type="range" id="normalStrength" min="0.5" max="5" step="0.1" value="1.5">
+            <!-- Resolution Dropdown -->
+            <div class="dropdown" id="resDropdown">
+                <button class="toolbar-dropdown-btn" id="resToggle">
+                    📐 <span id="resLabel">512×1024</span> <span class="caret">▾</span>
+                </button>
+                <div class="dropdown-menu dropdown-res" id="resMenu">
+                    <div class="res-container">
+                        <div>
+                            <label>Width</label>
+                            <input type="number" id="resWidth" value="512" step="128" min="128" max="4096">
+                        </div>
+                        <div>
+                            <label>Height</label>
+                            <input type="number" id="resHeight" value="1024" step="128" min="128" max="4096">
+                        </div>
+                    </div>
+                    <button id="applyResBtn" class="btn-secondary">💾 Apply Resolution</button>
                 </div>
             </div>
-        </details>
 
-        <!-- Action Buttons -->
-        <div class="action-bar">
-            <button id="generateBtn" class="btn-primary">🎨 Generate Hair</button>
-        </div>
-    </aside>
-
-    <!-- WORKSPACE -->
-    <main id="workspace">
-
-    <div class="toolbar-right">
-    <!-- Preset Dropdown -->
-    <div class="dropdown" id="presetDropdown">
-        <button class="toolbar-dropdown-btn" id="presetToggle">
-            🎨 Preset <span class="caret">▾</span>
-        </button>
-        <div class="dropdown-menu" id="presetMenu">
-            <button class="dropdown-item" data-preset="straight">💇 Straight</button>
-            <button class="dropdown-item" data-preset="wavy">🌊 Wavy</button>
-            <button class="dropdown-item" data-preset="curly">🌀 Curly</button>
-            <button class="dropdown-item" data-preset="messy">💥 Messy</button>
+            <!-- Icon Buttons -->
+            <button id="toggleBg" class="icon-btn" title="Toggle Background">🌓</button>
+            <button id="downloadBtn" class="icon-btn" title="Download current map">📥</button>
+            <button id="downloadAllBtn" class="btn-batch" title="Download all maps as ZIP">
+                📦 Export All
+            </button>
         </div>
     </div>
 
-    <!-- Resolution Panel -->
-    <div class="dropdown" id="resDropdown">
-        <button class="toolbar-dropdown-btn" id="resToggle">
-            📐 <span id="resLabel">512×1024</span> <span class="caret">▾</span>
-        </button>
-        <div class="dropdown-menu dropdown-res" id="resMenu">
-            <div class="res-container">
+    <!-- AREA KONTEN (3 KOLOM DI BAWAH TOOLBAR) -->
+    <div class="app-body">
+
+        <!-- SIDEBAR KIRI (Hair Parameters) -->
+        <aside id="sidebar-left">
+            <div class="logo">
+                <span class="logo-icon">💇</span>
                 <div>
-                    <label>Width</label>
-                    <input type="number" id="resWidth" value="512" step="128" min="128" max="4096">
-                </div>
-                <div>
-                    <label>Height</label>
-                    <input type="number" id="resHeight" value="1024" step="128" min="128" max="4096">
+                    <h1>Hairay</h1>
+                    <small>Hair Card Generator</small>
                 </div>
             </div>
-            <button id="applyResBtn" class="btn-secondary">💾 Apply Resolution</button>
-        </div>
+
+            <details class="acc" open>
+                <summary>💇 Hair Parameters</summary>
+                <div class="acc-body">
+                    <div class="control-group">
+                        <label>Strand Count <span id="val-count" class="value-display">200</span></label>
+                        <input type="range" id="count" min="10" max="2000" value="200">
+                    </div>
+                    <div class="control-group">
+                        <label>Base Thickness <span id="val-thickness" class="value-display">4</span></label>
+                        <input type="range" id="thickness" min="1" max="20" value="4">
+                    </div>
+                    <div class="control-group">
+                        <label>Length Variation <span id="val-length" class="value-display">80%</span></label>
+                        <input type="range" id="length" min="30" max="100" value="80">
+                    </div>
+                    <div class="control-group">
+                        <label>Direction (Bend) <span id="val-bend" class="value-display">0</span></label>
+                        <input type="range" id="bend" min="-150" max="150" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>Waviness <span id="val-wave" class="value-display">20</span></label>
+                        <input type="range" id="wave" min="0" max="100" value="20">
+                    </div>
+                    <div class="control-group">
+                        <label>Wave Frequency <span id="val-freq" class="value-display">3</span></label>
+                        <input type="range" id="freq" min="1" max="10" value="3">
+                    </div>
+                    <div class="control-group">
+                        <label>Spread Width <span id="val-spread" class="value-display">60</span></label>
+                        <input type="range" id="spread" min="10" max="500" value="60">
+                    </div>
+                    <div class="control-group">
+                        <label>Clumping <span id="val-clump" class="value-display">0</span></label>
+                        <input type="range" id="clump" min="0" max="100" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>Random Seed <span id="val-seed" class="value-display">1</span></label>
+                        <input type="range" id="seed" min="1" max="999" value="1">
+                    </div>
+                </div>
+            </details>
+
+            <div style="text-align: center; color: var(--text-dim); font-size: 0.75rem; margin-top: auto; padding-bottom: 10px;">
+                Settings apply in real-time
+            </div>
+        </aside>
+
+        <!-- MAIN WORKSPACE (Tengah) -->
+        <main id="workspace">
+            <!-- Preview Area -->
+            <div class="preview-area" id="previewArea">
+                <div class="canvas-wrapper" id="canvasWrapper">
+                    <canvas id="canvas" width="512" height="1024"></canvas>
+                </div>
+            </div>
+
+            <!-- Floating Map Switcher -->
+            <div class="floating-switcher" id="mapSwitcher">
+                <!-- Tombol di-generate oleh JS -->
+            </div>
+
+            <!-- Panel Zoom -->
+            <div class="zoom-controls">
+                <button id="zoomInBtn" class="zoom-btn" title="Zoom In">➕</button>
+                <button id="zoomOutBtn" class="zoom-btn" title="Zoom Out">➖</button>
+                <button id="resetZoomBtn" class="zoom-btn" title="Reset Zoom">🎯</button>
+            </div>
+        </main>
+
+        <!-- SIDEBAR KANAN (Appearance) -->
+        <aside id="sidebar-right">
+            <details class="acc" open>
+                <summary>🌈 Appearance</summary>
+                <div class="acc-body">
+                    <div class="control-group">
+                        <label>Root Color</label>
+                        <input type="color" id="rootColor" value="#2a1508">
+                    </div>
+                    <div class="control-group">
+                        <label>Tip Color</label>
+                        <input type="color" id="tipColor" value="#a56b46">
+                    </div>
+                    <div class="control-group">
+                        <label>Color Variance <span id="val-variance" class="value-display">25</span></label>
+                        <input type="range" id="variance" min="0" max="100" value="25">
+                    </div>
+                    <div class="control-group">
+                        <label>Normal Strength <span id="val-normalStrength" class="value-display">1.5</span></label>
+                        <input type="range" id="normalStrength" min="0.5" max="5" step="0.1" value="1.5">
+                    </div>
+                </div>
+            </details>
+        </aside>
+
     </div>
-
-    <button id="toggleBg" class="icon-btn" title="Toggle Background">🌓</button>
-    <button id="resetZoom" class="icon-btn" title="Reset Zoom">🔍</button>
-    <button id="downloadBtn" class="icon-btn" title="Download current map">📥</button>
-    <button id="downloadAllBtn" class="btn-batch" title="Download all maps as ZIP">
-        📦 Export All (ZIP)
-    </button>
-</div>
-
-
-        <!-- Canvas Preview -->
-        <div class="preview-area" id="previewArea">
-            <div class="canvas-wrapper" id="canvasWrapper">
-                <canvas id="canvas" width="512" height="1024"></canvas>
-            </div>
-        </div>
-
-        <!-- Filmstrip Map (BOTTOM CENTER) -->
-        <section class="filmstrip" id="filmstrip">
-            <div class="filmstrip-header">
-                <span>Maps</span>
-                <span class="filmstrip-hint">klik untuk preview</span>
-            </div>
-            <div class="filmstrip-track" id="filmstripTrack">
-                <!-- Generated by JS -->
-            </div>
-        </section>
-
-    </main>
 </div>
 
 <script type="module" src="js/app.js"></script>
