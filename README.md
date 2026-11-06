@@ -1,3 +1,9 @@
+<div align="center">
+  <a href="https://amiruloh.github.io/Hairay/">
+    <img src="https://img.shields.io/badge/💇_Luncurkan_Aplikasi-Hairay-success?style=for-the-badge" alt="Go To Hairay">
+  </a>
+</div>
+
 ## ✨ Fitur Utama
 
 *   **Generasi Prosedural:** Atur jumlah helaian rambut, ketebalan, panjang, lengkungan (*bend*), dan gelombang (*waviness*) secara *real-time*.
