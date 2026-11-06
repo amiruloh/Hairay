@@ -1,7 +1,3 @@
-# 3D Hair Card Texture Generator 💇‍♀️🎨
-
-Sebuah aplikasi berbasis web interaktif untuk menghasilkan tekstur *hair card* 3D secara prosedural. Aplikasi ini dirancang menggunakan arsitektur modular (*Clean Code*) dengan *Vanilla Web Technologies* (tanpa framework tambahan).
-
 ## ✨ Fitur Utama
 
 *   **Generasi Prosedural:** Atur jumlah helaian rambut, ketebalan, panjang, lengkungan (*bend*), dan gelombang (*waviness*) secara *real-time*.
@@ -14,12 +10,6 @@ Sebuah aplikasi berbasis web interaktif untuk menghasilkan tekstur *hair card* 3
     *   Ambient Occlusion (AO) Map
     *   Root-Tip Mask
 *   **Resolusi Fleksibel:** Atur dimensi kanvas (lebar x tinggi) sesuai kebutuhan proyek Anda (hingga 4096px).
-
-## 🛠️ Teknologi yang Digunakan
-
-*   **HTML5:** Struktur antarmuka & elemen `<canvas>`.
-*   **CSS3:** Desain visual (*flexbox*, variabel CSS, *dark theme*).
-*   **JavaScript (ES6 Modules):** Logika kalkulasi geometri, manipulasi *Canvas 2D API*, dan manajemen *state*.
 
 ## 📂 Struktur Folder (Clean Code)
 
