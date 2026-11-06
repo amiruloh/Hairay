@@ -1,6 +1,11 @@
 <div align="center">
+ <a>
+     <img src="https://i.ibb.co.com/Mx1rWMTr/Hairay-Logo.png"alt="Go To Hairay" width="128">
+  </a>
+</div>
+<div align="center">
   <a href="https://amiruloh.github.io/Hairay/">
-    <img src="https://img.shields.io/badge/Go_To_Hairay-blue?style=plastic" width="150" alt="Go To Hairay">
+    <img src="https://img.shields.io/badge/Go_To_Hairay-blue?style=plastic" width="128" alt="Go To Hairay">
   </a>
 </div>
 
