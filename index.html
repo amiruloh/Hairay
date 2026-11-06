@@ -32,37 +32,6 @@
             </div>
         </div>
 
-        <!-- Accordion: Preset -->
-        <details class="acc" open>
-            <summary>🎨 Preset</summary>
-            <div class="acc-body">
-                <div class="preset-grid">
-                    <button class="preset-btn" data-preset="straight">Straight</button>
-                    <button class="preset-btn" data-preset="wavy">Wavy</button>
-                    <button class="preset-btn" data-preset="curly">Curly</button>
-                    <button class="preset-btn" data-preset="messy">Messy</button>
-                </div>
-            </div>
-        </details>
-
-        <!-- Accordion: Resolution -->
-        <details class="acc">
-            <summary>📐 Resolution</summary>
-            <div class="acc-body">
-                <div class="res-container">
-                    <div>
-                        <label>Width</label>
-                        <input type="number" id="resWidth" value="512" step="128" min="128" max="4096">
-                    </div>
-                    <div>
-                        <label>Height</label>
-                        <input type="number" id="resHeight" value="1024" step="128" min="128" max="4096">
-                    </div>
-                </div>
-                <button id="applyResBtn" class="btn-secondary">💾 Apply Resolution</button>
-            </div>
-        </details>
-
         <!-- Accordion: Hair Parameters -->
         <details class="acc" open>
             <summary>💇 Hair Parameters</summary>
@@ -138,21 +107,48 @@
     <!-- WORKSPACE -->
     <main id="workspace">
 
-        <!-- Top Toolbar -->
-        <div class="toolbar">
-            <div class="toolbar-left">
-                <span class="badge" id="statusText">Ready</span>
-                <span class="info" id="statusInfo">512 × 1024 · 200 strands</span>
-            </div>
-            <div class="toolbar-right">
-                <button id="toggleBg" class="icon-btn" title="Toggle Background">🌓</button>
-                <button id="resetZoom" class="icon-btn" title="Reset Zoom">🔍</button>
-                <button id="downloadBtn" class="icon-btn" title="Download current map">📥</button>
-                <button id="downloadAllBtn" class="btn-batch" title="Download all maps as ZIP">
-                    📦 Export All (ZIP)
-                </button>
-            </div>
+    <div class="toolbar-right">
+    <!-- Preset Dropdown -->
+    <div class="dropdown" id="presetDropdown">
+        <button class="toolbar-dropdown-btn" id="presetToggle">
+            🎨 Preset <span class="caret">▾</span>
+        </button>
+        <div class="dropdown-menu" id="presetMenu">
+            <button class="dropdown-item" data-preset="straight">💇 Straight</button>
+            <button class="dropdown-item" data-preset="wavy">🌊 Wavy</button>
+            <button class="dropdown-item" data-preset="curly">🌀 Curly</button>
+            <button class="dropdown-item" data-preset="messy">💥 Messy</button>
         </div>
+    </div>
+
+    <!-- Resolution Panel -->
+    <div class="dropdown" id="resDropdown">
+        <button class="toolbar-dropdown-btn" id="resToggle">
+            📐 <span id="resLabel">512×1024</span> <span class="caret">▾</span>
+        </button>
+        <div class="dropdown-menu dropdown-res" id="resMenu">
+            <div class="res-container">
+                <div>
+                    <label>Width</label>
+                    <input type="number" id="resWidth" value="512" step="128" min="128" max="4096">
+                </div>
+                <div>
+                    <label>Height</label>
+                    <input type="number" id="resHeight" value="1024" step="128" min="128" max="4096">
+                </div>
+            </div>
+            <button id="applyResBtn" class="btn-secondary">💾 Apply Resolution</button>
+        </div>
+    </div>
+
+    <button id="toggleBg" class="icon-btn" title="Toggle Background">🌓</button>
+    <button id="resetZoom" class="icon-btn" title="Reset Zoom">🔍</button>
+    <button id="downloadBtn" class="icon-btn" title="Download current map">📥</button>
+    <button id="downloadAllBtn" class="btn-batch" title="Download all maps as ZIP">
+        📦 Export All (ZIP)
+    </button>
+</div>
+
 
         <!-- Canvas Preview -->
         <div class="preview-area" id="previewArea">

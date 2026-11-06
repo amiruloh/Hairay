@@ -159,6 +159,64 @@ canvas.addEventListener('dblclick', () => {
     canvas.classList.toggle('zoom-in', state.zoomed);
 });
 
+// ============ DROPDOWN (Preset & Resolution) ============
+function setupDropdown(toggleId, dropdownId) {
+    const toggle = document.getElementById(toggleId);
+    const dropdown = document.getElementById(dropdownId);
+    if (!toggle || !dropdown) return;
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Tutup dropdown lain
+        document.querySelectorAll('.dropdown.open').forEach(d => {
+            if (d !== dropdown) d.classList.remove('open');
+        });
+        dropdown.classList.toggle('open');
+    });
+
+    dropdown.addEventListener('click', (e) => {
+        // Klik di dalam menu (kecuali tombol toggle) tidak menutup
+        if (e.target.closest('.dropdown-menu')) e.stopPropagation();
+    });
+}
+
+setupDropdown('presetToggle', 'presetDropdown');
+setupDropdown('resToggle', 'resDropdown');
+
+// Tutup semua dropdown saat klik di luar
+document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+});
+
+// Update label resolusi setelah apply
+const originalApply = document.getElementById('applyResBtn');
+// Kita bungkus dengan listener tambahan (listener asli tetap jalan)
+originalApply.addEventListener('click', () => {
+    setTimeout(() => {
+        const label = document.getElementById('resLabel');
+        if (label) label.textContent = `${canvas.width}×${canvas.height}`;
+        document.getElementById('resDropdown').classList.remove('open');
+    }, 50);
+});
+
+document.querySelectorAll('.dropdown-item[data-preset]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const p = PRESETS[btn.dataset.preset];
+        if (!p) return;
+        Object.entries(p).forEach(([key, val]) => {
+            if (inputs[key]) {
+                inputs[key].value = val;
+                const disp = document.getElementById(`val-${key}`);
+                if (disp) disp.innerText = val;
+                if (inputs[key].type === 'range') updateRangeFill(inputs[key]);
+            }
+        });
+        updateApp(true);
+        showToast(`✨ Preset: ${btn.dataset.preset}`);
+        document.getElementById('presetDropdown').classList.remove('open'); // <- tambahan
+    });
+});
+
 // ============ DOWNLOAD ============
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
@@ -230,7 +288,7 @@ const PRESETS = {
     messy:    { wave: 40, freq: 4, bend: -40, clump: 40, thickness: 3, count: 600 }
 };
 
-document.querySelectorAll('.preset-btn').forEach(btn => {
+document.querySelectorAll('.dropdown-item[data-preset]').forEach(btn => {
     btn.addEventListener('click', () => {
         const p = PRESETS[btn.dataset.preset];
         if (!p) return;

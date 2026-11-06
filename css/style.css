@@ -454,3 +454,103 @@ canvas.zoom-in:hover {
     .toolbar-right { flex-wrap: wrap; }
     .filmstrip-item { width: 68px; }
 }
+
+/* ============ TOOLBAR DROPDOWN ============ */
+.dropdown {
+    position: relative;
+}
+
+.toolbar-dropdown-btn {
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+.toolbar-dropdown-btn:hover {
+    border-color: var(--accent);
+    background: rgba(124, 92, 255, 0.1);
+}
+.toolbar-dropdown-btn .caret {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    transition: transform var(--transition);
+}
+.dropdown.open .toolbar-dropdown-btn {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.dropdown.open .caret { transform: rotate(180deg); }
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 160px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+.dropdown.open .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 9px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.dropdown-item:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.dropdown-res {
+    min-width: 240px;
+    padding: 12px;
+}
+.dropdown-res .res-container {
+    margin-bottom: 10px;
+}
+.dropdown-res label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 5px;
+}
+.dropdown-res input[type="number"] {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+}
+.dropdown-res .btn-secondary {
+    padding: 7px;
+    font-size: 0.78rem;
+}
